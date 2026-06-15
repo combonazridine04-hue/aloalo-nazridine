@@ -15,12 +15,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Récupérer le code
         uses: actions/checkout@v4
 
@@ -28,9 +26,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Installer les dépendances
-        run: npm install
+        run: npm ci
 
       - name: Construire l'application
         run: npm run build
@@ -57,7 +56,6 @@ jobs:
       id-token: write
 
     steps:
-
       - name: Déployer
         id: deployment
         uses: actions/deploy-pages@v4
